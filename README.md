@@ -1,5 +1,7 @@
 # MCX Elementor Editor Optimizer
 
+[![GitHub](https://img.shields.io/badge/GitHub-miracuves%2FMCX--Elementor--Editor--Optimizer-181717?logo=github)](https://github.com/miracuves/MCX-Elementor-Editor-Optimizer)
+
 **A product of [Miracuves.com](https://miracuves.com) — powered by [Miracuves](https://miracuves.com).**
 
 Enterprise-grade WordPress plugin that speeds up the Elementor editor by loading only what you need for each session: choose **Build Mode** (full experience) or **Edit Mode** (fewer widgets and optional plugin stripping) so the editor stays fast without breaking your site or your frontend.
@@ -73,7 +75,10 @@ Enterprise-grade WordPress plugin that speeds up the Elementor editor by loading
 ## Installation
 
 1. **Install the plugin**
-   - Upload the plugin folder to `wp-content/plugins/` (e.g. `EEOptimizer` or `elementor-editor-optimizer`), or install via WordPress admin → Plugins → Add New → Upload.
+   - **From GitHub (clone):**  
+     `git clone https://github.com/miracuves/MCX-Elementor-Editor-Optimizer.git wp-content/plugins/MCX-Elementor-Editor-Optimizer`  
+     Then in WordPress go to **Plugins** and activate **MCX Elementor Editor Optimizer**.
+   - **Or:** Upload the plugin folder to `wp-content/plugins/` (e.g. `EEOptimizer` or `MCX-Elementor-Editor-Optimizer`), or install via WordPress admin → Plugins → Add New → Upload.
    - Activate **MCX Elementor Editor Optimizer**.
 
 2. **Configure (optional but recommended)**
@@ -239,6 +244,7 @@ Every option is stored under **Settings → MCX Elementor Editor Optimizer**. Pu
 ## License & Credits
 
 - **License:** GPL v2 or later.
+- **Repository:** [github.com/miracuves/MCX-Elementor-Editor-Optimizer](https://github.com/miracuves/MCX-Elementor-Editor-Optimizer)
 - **Branding:** MCX Elementor Editor Optimizer — a product of [Miracuves.com](https://miracuves.com), powered by [Miracuves](https://miracuves.com).
 
 This plugin only alters behavior inside the Elementor editor session. Always test Build/Edit and Firewall/Diet choices on a staging or test site before relying on them in production.
