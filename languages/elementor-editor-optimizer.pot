@@ -1,0 +1,501 @@
+# Copyright (C) 2024 Miracuves
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Elementor Editor Optimizer 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/elementor-editor-optimizer\n"
+"POT-Creation-Date: 2024-01-01T00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: elementor-editor-optimizer.php:3
+msgid "Elementor Editor Optimizer"
+msgstr ""
+
+#: elementor-editor-optimizer.php:4
+msgid "Advanced performance optimization plugin for Elementor page builder. Speeds up editor loading, disables unused widgets, optimizes assets, and improves overall performance."
+msgstr ""
+
+#: elementor-editor-optimizer.php:70
+msgid "Elementor Editor Optimizer requires PHP 7.4 or higher. Please update your PHP version."
+msgstr ""
+
+#: elementor-editor-optimizer.php:78
+msgid "Elementor Editor Optimizer requires WordPress 5.0 or higher. Please update WordPress."
+msgstr ""
+
+#: elementor-editor-optimizer.php:86
+msgid "Elementor Editor Optimizer requires Elementor to be installed and activated. Please install Elementor first."
+msgstr ""
+
+#: elementor-editor-optimizer.php:94
+msgid "Elementor Editor Optimizer requires Elementor 3.0.0 or higher. Please update Elementor."
+msgstr ""
+
+#: elementor-editor-optimizer.php:244
+msgid "Editor Optimizer"
+msgstr ""
+
+#: elementor-editor-optimizer.php:245
+msgid "Editor Optimizer"
+msgstr ""
+
+#: elementor-editor-optimizer.php:373
+msgid "Scanning. Please wait..."
+msgstr ""
+
+#: elementor-editor-optimizer.php:374
+msgid "Are you sure you want to reset all settings?"
+msgstr ""
+
+#: elementor-editor-optimizer.php:375
+msgid "Are you sure you want to import these settings? This will overwrite your current settings."
+msgstr ""
+
+#: elementor-editor-optimizer.php:590
+msgid "General"
+msgstr ""
+
+#: elementor-editor-optimizer.php:591
+msgid "Widgets"
+msgstr ""
+
+#: elementor-editor-optimizer.php:592
+msgid "Assets"
+msgstr ""
+
+#: elementor-editor-optimizer.php:593
+msgid "Advanced"
+msgstr ""
+
+#: elementor-editor-optimizer.php:594
+msgid "Tools"
+msgstr ""
+
+#: elementor-editor-optimizer.php:601
+msgid "Save Changes"
+msgstr ""
+
+#: elementor-editor-optimizer.php:607
+msgid "Editor Performance Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:612
+msgid "PHP Memory Limit for Editor"
+msgstr ""
+
+#: elementor-editor-optimizer.php:617
+msgid "Increase memory limit for Elementor editor. Examples: 256M, 512M, 1G"
+msgstr ""
+
+#: elementor-editor-optimizer.php:623
+msgid "Editor Optimization"
+msgstr ""
+
+#: elementor-editor-optimizer.php:626
+msgid "Enable editor optimization (recommended)"
+msgstr ""
+
+#: elementor-editor-optimizer.php:629
+msgid "Optimize editor loading by disabling unnecessary features"
+msgstr ""
+
+#: elementor-editor-optimizer.php:635
+msgid "Switch Editor Loader Method"
+msgstr ""
+
+#: elementor-editor-optimizer.php:638
+msgid "Switch to XHR loader method"
+msgstr ""
+
+#: elementor-editor-optimizer.php:641
+msgid "Try this if editor is slow to load"
+msgstr ""
+
+#: elementor-editor-optimizer.php:647
+msgid "Enable Caching"
+msgstr ""
+
+#: elementor-editor-optimizer.php:650
+msgid "Enable smart caching"
+msgstr ""
+
+#: elementor-editor-optimizer.php:653
+msgid "Cache optimization data to improve performance"
+msgstr ""
+
+#: elementor-editor-optimizer.php:659
+msgid "Cache Expiration"
+msgstr ""
+
+#: elementor-editor-optimizer.php:662
+msgid "seconds (default: 3600 = 1 hour)"
+msgstr ""
+
+#: elementor-editor-optimizer.php:668
+msgid "Safe Mode"
+msgstr ""
+
+#: elementor-editor-optimizer.php:671
+msgid "Enable safe mode (recommended)"
+msgstr ""
+
+#: elementor-editor-optimizer.php:674
+msgid "Prevents disabling critical widgets and features"
+msgstr ""
+
+#: elementor-editor-optimizer.php:683
+msgid "Widget Management"
+msgstr ""
+
+#: elementor-editor-optimizer.php:686
+msgid "Scan your website to find and disable unused Elementor widgets:"
+msgstr ""
+
+#: elementor-editor-optimizer.php:688
+msgid "Scan for Unused Widgets"
+msgstr ""
+
+#: elementor-editor-optimizer.php:695
+msgid "Disable Unused Widgets"
+msgstr ""
+
+#: elementor-editor-optimizer.php:696
+msgid "Select widgets to disable. Disabling unused widgets can significantly speed up the editor loading time."
+msgstr ""
+
+#: elementor-editor-optimizer.php:702
+msgid "Select All"
+msgstr ""
+
+#: elementor-editor-optimizer.php:703
+msgid "Deselect All"
+msgstr ""
+
+#: elementor-editor-optimizer.php:704
+msgid "Select Third-Party Only"
+msgstr ""
+
+#: elementor-editor-optimizer.php:714
+msgid "Core"
+msgstr ""
+
+#: elementor-editor-optimizer.php:718
+msgid "Third-Party"
+msgstr ""
+
+#: elementor-editor-optimizer.php:728
+msgid "Widget Whitelist"
+msgstr ""
+
+#: elementor-editor-optimizer.php:729
+msgid "Whitelisted widgets will never be disabled, even if selected above:"
+msgstr ""
+
+#: elementor-editor-optimizer.php:744
+msgid "Asset Optimization"
+msgstr ""
+
+#: elementor-editor-optimizer.php:749
+msgid "Optimize Google Fonts"
+msgstr ""
+
+#: elementor-editor-optimizer.php:752
+msgid "Load only used Google Fonts"
+msgstr ""
+
+#: elementor-editor-optimizer.php:755
+msgid "Intelligently loads only the fonts actually used on your pages"
+msgstr ""
+
+#: elementor-editor-optimizer.php:761
+msgid "Optimize Icon Libraries"
+msgstr ""
+
+#: elementor-editor-optimizer.php:764
+msgid "Load only used icon sets"
+msgstr ""
+
+#: elementor-editor-optimizer.php:767
+msgid "Intelligently loads only the icon libraries actually used on your pages"
+msgstr ""
+
+#: elementor-editor-optimizer.php:773
+msgid "Enable Lazy Loading"
+msgstr ""
+
+#: elementor-editor-optimizer.php:776
+msgid "Enable lazy loading for images"
+msgstr ""
+
+#: elementor-editor-optimizer.php:779
+msgid "Improves page load time by loading images only when needed"
+msgstr ""
+
+#: elementor-editor-optimizer.php:785
+msgid "Minify HTML"
+msgstr ""
+
+#: elementor-editor-optimizer.php:788
+msgid "Minify HTML output"
+msgstr ""
+
+#: elementor-editor-optimizer.php:791
+msgid "Reduces HTML file size by removing unnecessary whitespace and comments"
+msgstr ""
+
+#: elementor-editor-optimizer.php:797
+msgid "Optimize CSS & JavaScript"
+msgstr ""
+
+#: elementor-editor-optimizer.php:800
+msgid "Optimize asset loading"
+msgstr ""
+
+#: elementor-editor-optimizer.php:803
+msgid "Remove unnecessary CSS and JavaScript files"
+msgstr ""
+
+#: elementor-editor-optimizer.php:811
+msgid "WordPress Core Optimizations"
+msgstr ""
+
+#: elementor-editor-optimizer.php:816
+msgid "Disable Emojis"
+msgstr ""
+
+#: elementor-editor-optimizer.php:819
+msgid "Disable WordPress emoji functionality"
+msgstr ""
+
+#: elementor-editor-optimizer.php:822
+msgid "Removes emoji scripts and styles to improve loading speed"
+msgstr ""
+
+#: elementor-editor-optimizer.php:828
+msgid "Disable Embeds"
+msgstr ""
+
+#: elementor-editor-optimizer.php:831
+msgid "Disable WordPress embed functionality"
+msgstr ""
+
+#: elementor-editor-optimizer.php:834
+msgid "Removes oEmbed functionality to improve loading speed"
+msgstr ""
+
+#: elementor-editor-optimizer.php:840
+msgid "Disable jQuery Migrate"
+msgstr ""
+
+#: elementor-editor-optimizer.php:843
+msgid "Disable jQuery migrate script"
+msgstr ""
+
+#: elementor-editor-optimizer.php:846
+msgid "Removes jQuery migrate to reduce JavaScript loading time"
+msgstr ""
+
+#: elementor-editor-optimizer.php:856
+msgid "Advanced Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:861
+msgid "Advanced Mode"
+msgstr ""
+
+#: elementor-editor-optimizer.php:864
+msgid "Enable advanced optimizations"
+msgstr ""
+
+#: elementor-editor-optimizer.php:867
+msgid "Enables experimental optimizations. Use with caution."
+msgstr ""
+
+#: elementor-editor-optimizer.php:873
+msgid "Debug Mode"
+msgstr ""
+
+#: elementor-editor-optimizer.php:876
+msgid "Enable debug logging"
+msgstr ""
+
+#: elementor-editor-optimizer.php:879
+msgid "Logs optimization activities for troubleshooting"
+msgstr ""
+
+#: elementor-editor-optimizer.php:884
+msgid "Warning:"
+msgstr ""
+
+#: elementor-editor-optimizer.php:884
+msgid "Advanced features may cause conflicts with other plugins or themes. Test thoroughly on a staging site before using on production."
+msgstr ""
+
+#: elementor-editor-optimizer.php:893
+msgid "Import/Export Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:896
+msgid "Export Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:897
+msgid "Export your current settings to backup or share with other sites."
+msgstr ""
+
+#: elementor-editor-optimizer.php:898
+msgid "Export Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:901
+msgid "Import Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:902
+msgid "Import settings from a backup or another site."
+msgstr ""
+
+#: elementor-editor-optimizer.php:904
+msgid "Import Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:912
+msgid "Maintenance Tools"
+msgstr ""
+
+#: elementor-editor-optimizer.php:915
+msgid "Clear Cache"
+msgstr ""
+
+#: elementor-editor-optimizer.php:916
+msgid "Clear all optimization caches."
+msgstr ""
+
+#: elementor-editor-optimizer.php:917
+msgid "Clear Cache"
+msgstr ""
+
+#: elementor-editor-optimizer.php:920
+msgid "Reset Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:921
+msgid "Reset all settings to default values."
+msgstr ""
+
+#: elementor-editor-optimizer.php:922
+msgid "Reset Settings"
+msgstr ""
+
+#: elementor-editor-optimizer.php:930
+msgid "Performance Test"
+msgstr ""
+
+#: elementor-editor-optimizer.php:933
+msgid "Run Performance Test"
+msgstr ""
+
+#: elementor-editor-optimizer.php:934
+msgid "Test your site performance and get optimization recommendations."
+msgstr ""
+
+#: elementor-editor-optimizer.php:935
+msgid "Run Test"
+msgstr ""
+
+#: elementor-editor-optimizer.php:945
+msgid "Debug Log"
+msgstr ""
+
+#: elementor-editor-optimizer.php:951
+msgid "No debug entries yet."
+msgstr ""
+
+#: assets/js/admin.js:37
+msgid "Found %d unused widgets out of %d total widgets."
+msgstr ""
+
+#: assets/js/admin.js:44
+msgid "Unused widgets:"
+msgstr ""
+
+#: assets/js/admin.js:56
+msgid "The unused widgets have been selected above. Click \"Save Changes\" to disable them."
+msgstr ""
+
+#: assets/js/admin.js:84
+msgid "Error exporting settings: %s"
+msgstr ""
+
+#: assets/js/admin.js:91
+msgid "An error occurred while exporting settings."
+msgstr ""
+
+#: assets/js/admin.js:115
+msgid "Error importing settings: %s"
+msgstr ""
+
+#: assets/js/admin.js:122
+msgid "An error occurred while importing settings."
+msgstr ""
+
+#: assets/js/admin.js:126
+msgid "Invalid file format. Please select a valid settings file."
+msgstr ""
+
+#: assets/js/admin.js:145
+msgid "Error resetting settings: %s"
+msgstr ""
+
+#: assets/js/admin.js:152
+msgid "An error occurred while resetting settings."
+msgstr ""
+
+#: assets/js/admin.js:178
+msgid "Error clearing cache: %s"
+msgstr ""
+
+#: assets/js/admin.js:185
+msgid "An error occurred while clearing cache."
+msgstr ""
+
+#: assets/js/admin.js:213
+msgid "Error running performance test: %s"
+msgstr ""
+
+#: assets/js/admin.js:220
+msgid "An error occurred while running performance test."
+msgstr ""
+
+#: elementor-editor-optimizer.php:1009
+msgid "Settings reset successfully"
+msgstr ""
+
+#: elementor-editor-optimizer.php:1019
+msgid "Settings imported successfully"
+msgstr ""
+
+#: elementor-editor-optimizer.php:1040
+msgid "Cache cleared successfully"
+msgstr ""
+
+#: elementor-editor-optimizer.php:1108
+msgid "Permission denied"
+msgstr ""
+
+#: elementor-editor-optimizer.php:1113
+msgid "Security check failed"
+msgstr ""
+
+#: elementor-editor-optimizer.php:1118
+msgid "No import data provided"
+msgstr ""
+
+#: elementor-editor-optimizer.php:1125
+msgid "Invalid import data"
+msgstr ""

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elementor Editor Optimizer - Button Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .button { padding: 10px 15px; margin: 5px; background: #0073aa; color: white; border: none; cursor: pointer; }
+        .button:hover { background: #005a87; }
+        .button:disabled { background: #ccc; cursor: not-allowed; }
+        .checkbox-list { margin: 20px 0; }
+        .checkbox-list input { margin-right: 10px; }
+        .checkbox-list div { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h2>Elementor Editor Optimizer - Button Functionality Test</h2>
+    
+    <div>
+        <button id="scan-widget-usage" class="button">Scan Widget Usage</button>
+        <button id="auto-disable-unused" class="button">Auto-Disable Unused</button>
+        <button id="reset-usage-data" class="button">Reset Usage Data</button>
+    </div>
+    
+    <div>
+        <button id="select-all-unused" class="button">Select All Unused</button>
+        <button id="select-none-unused" class="button">Select None</button>
+        <button id="disable-selected-unused" class="button button-secondary">Disable Selected Widgets</button>
+    </div>
+    
+    <div class="checkbox-list">
+        <h3>Unused Widgets (Test Data):</h3>
+        <div><input type="checkbox" class="unused-widget-checkbox" value="widget1"> Widget 1</div>
+        <div><input type="checkbox" class="unused-widget-checkbox" value="widget2"> Widget 2</div>
+        <div><input type="checkbox" class="unused-widget-checkbox" value="widget3"> Widget 3</div>
+        <div><input type="checkbox" class="unused-widget-checkbox" value="widget4"> Widget 4</div>
+        <div><input type="checkbox" class="unused-widget-checkbox" value="widget5"> Widget 5</div>
+    </div>
+
+    <script>
+        // Mock eeo_data object for testing
+        window.eeo_data = {
+            ajax_url: '/wp-admin/admin-ajax.php',
+            nonce: 'test-nonce'
+        };
+    </script>
+    <script src="assets/js/admin.js"></script>
+    
+    <div id="test-results" style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-left: 4px solid #0073aa;">
+        <h3>Test Results:</h3>
+        <p>Open browser console (F12) to see debug messages</p>
+        <ul>
+            <li>Click buttons to test functionality</li>
+            <li>Check/uncheck boxes to test selection</li>
+            <li>All console logs will show if JavaScript is working</li>
+        </ul>
+    </div>
+</body>
+</html>

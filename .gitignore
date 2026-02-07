@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Logs and temp
+*.log
+*.tmp
+.cache/
+
+# Node (if used for build)
+node_modules/
+npm-debug.log*
+
+# Composer (if used)
+vendor/
+
+# Local / env (do not commit secrets)
+.env
+.env.local
+*.local.php
