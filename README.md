@@ -11,6 +11,7 @@ Enterprise-grade WordPress plugin that speeds up the Elementor editor by loading
 ## Table of Contents
 
 - [Purpose](#purpose)
+- [Screenshots](#screenshots)
 - [How It Works](#how-it-works)
 - [Key Concepts](#key-concepts)
 - [Installation](#installation)
@@ -37,6 +38,18 @@ Enterprise-grade WordPress plugin that speeds up the Elementor editor by loading
 - **Reduce editor load time and memory** by disabling unused widgets and optionally disabling selected plugins only in the editor.
 
 **Audience:** Site owners, agencies, and developers who use Elementor and want faster editor loading without risking layout or frontend breakage.
+
+---
+
+## Screenshots
+
+| Launch screen – Build / Edit mode | Settings – Widgets & Firewall |
+|-----------------------------------|--------------------------------|
+| ![MCX Elementor Launch Modes](Screenshots/Screenshot%202026-02-08%20at%209.17.47%E2%80%AFAM.png) | ![Settings – Disable Widgets & Editor Firewall](Screenshots/Screenshot%202026-02-08%20at%209.17.57%E2%80%AFAM.png) |
+
+| Settings & options | Widget analytics | Performance info |
+|--------------------|-------------------|-------------------|
+| ![Settings options](Screenshots/Screenshot%202026-02-08%20at%209.18.13%E2%80%AFAM.png) | ![Widget usage analytics](Screenshots/Screenshot%202026-02-08%20at%209.18.23%E2%80%AFAM.png) | ![Performance information](Screenshots/Screenshot%202026-02-08%20at%209.18.51%E2%80%AFAM.png) |
 
 ---
 
