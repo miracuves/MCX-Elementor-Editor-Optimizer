@@ -164,7 +164,7 @@ if (!defined('ABSPATH')) {
         
         <div class="test-item">
             <h3>Plugin Information</h3>
-            <p><strong>Version:</strong> 1.0.0<br>
+            <p><strong>Version:</strong> 1.0.1<br>
             <strong>Author:</strong> Miracuves<br>
             <strong>Requirements:</strong> PHP 7.4+, WordPress 5.0+, Elementor 3.0.0+</p>
         </div>

@@ -1,6 +1,6 @@
 {
   "name": "elementor-editor-optimizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Advanced performance optimization plugin for Elementor page builder",
   "main": "elementor-editor-optimizer.php",
   "scripts": {

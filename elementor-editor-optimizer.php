@@ -3,7 +3,7 @@
  * Plugin Name: MCX Elementor Editor Optimizer
  * Plugin URI: https://miracuves.com
  * Description: Advanced performance optimization plugin for Elementor page builder. Speeds up editor loading, disables unused widgets, optimizes assets, and improves overall performance. A product of Miracuves.com — powered by Miracuves.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Miracuves
  * Author URI: https://miracuves.com
  * Text Domain: elementor-editor-optimizer
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('EEO_VERSION', '1.0.0');
+define('EEO_VERSION', '1.0.1');
 define('EEO_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('EEO_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('EEO_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -376,89 +376,103 @@ class Elementor_Editor_Optimizer {
         $post_id    = isset($_GET['post']) ? absint($_GET['post']) : 0;
         $return_url = isset($_GET['eeo_return']) ? esc_url_raw(wp_unslash($_GET['eeo_return'])) : '';
         ?>
-        <div class="wrap" style="max-width: 720px;">
-            <h1><?php esc_html_e('MCX Elementor Launch Modes', 'elementor-editor-optimizer'); ?></h1>
-            <p><?php esc_html_e('Choose Build Mode to load everything (best for building), or Edit Mode to speed up the editor for quick changes.', 'elementor-editor-optimizer'); ?></p>
-            
-            <form method="post">
+        <div class="wrap eeo-launch-wrap">
+            <div class="eeo-launch-header">
+                <h1 class="eeo-launch-title"><?php esc_html_e('MCX Elementor Launch Modes', 'elementor-editor-optimizer'); ?></h1>
+                <p class="eeo-launch-subtitle"><?php esc_html_e('Choose Build Mode to load everything (best for building), or Edit Mode to speed up the editor for quick changes.', 'elementor-editor-optimizer'); ?></p>
+            </div>
+
+            <form method="post" class="eeo-launch-form">
                 <?php wp_nonce_field('eeo_launch_modes', 'eeo_launch_nonce'); ?>
                 <input type="hidden" name="eeo_return" value="<?php echo esc_attr($return_url); ?>">
                 <input type="hidden" name="eeo_post_id" value="<?php echo esc_attr($post_id); ?>">
-                
-                <table class="form-table">
-                    <tr>
-                        <th scope="row"><?php esc_html_e('Session Type', 'elementor-editor-optimizer'); ?></th>
-                        <td>
-                            <label style="display:block;margin-bottom:8px;">
-                                <input type="radio" name="eeo_profile" value="build">
-                                <strong><?php esc_html_e('Build Mode', 'elementor-editor-optimizer'); ?></strong><br>
-                                <span class="description"><?php esc_html_e('Loads all widgets and plugins. Use when building new sections or when something is missing.', 'elementor-editor-optimizer'); ?></span>
-                            </label>
-                            <label style="display:block;margin-bottom:8px;">
-                                <input type="radio" name="eeo_profile" value="edit" checked>
-                                <strong><?php esc_html_e('Edit Mode (faster)', 'elementor-editor-optimizer'); ?></strong><br>
-                                <span class="description"><?php esc_html_e('Optimizes the editor so it loads faster for quick edits.', 'elementor-editor-optimizer'); ?></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><?php esc_html_e('Edit Mode Options', 'elementor-editor-optimizer'); ?></th>
-                        <td>
-                            <label style="display:block;margin-bottom:8px;">
-                                <input type="checkbox" name="eeo_modes[]" value="firewall" checked>
-                                <strong><?php esc_html_e('Editor Firewall (recommended)', 'elementor-editor-optimizer'); ?></strong><br>
-                                <span class="description"><?php esc_html_e('Loads Elementor with a minimal set of plugins and hooks for this editor session only.', 'elementor-editor-optimizer'); ?></span>
-                            </label>
-                            <label style="display:block;margin-bottom:8px;">
-                                <input type="checkbox" name="eeo_modes[]" value="snapshot">
-                                <strong><?php esc_html_e('Snapshot Cache', 'elementor-editor-optimizer'); ?></strong><br>
-                                <span class="description"><?php esc_html_e('Reuses precomputed Elementor data where available to reduce database work.', 'elementor-editor-optimizer'); ?></span>
-                            </label>
-                            <label style="display:block;margin-bottom:8px;">
-                                <input type="checkbox" name="eeo_modes[]" value="diet">
-                                <strong><?php esc_html_e('Widget Diet', 'elementor-editor-optimizer'); ?></strong><br>
-                                <span class="description"><?php esc_html_e('Disables unused Elementor widgets according to your optimizer settings.', 'elementor-editor-optimizer'); ?></span>
-                            </label>
-                            <p class="description"><?php esc_html_e('These options apply only when Edit Mode is selected.', 'elementor-editor-optimizer'); ?></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><?php esc_html_e('Remember choice', 'elementor-editor-optimizer'); ?></th>
-                        <td>
-                            <?php if ($post_id > 0) : ?>
-                            <label style="display:block;margin-bottom:6px;">
-                                <input type="checkbox" name="eeo_remember_page" value="1">
-                                <?php esc_html_e('Remember for this page', 'elementor-editor-optimizer'); ?>
-                            </label>
-                            <?php endif; ?>
-                            <label style="display:block;">
-                                <input type="checkbox" name="eeo_remember_global" value="1">
-                                <?php esc_html_e('Remember globally (use these modes by default)', 'elementor-editor-optimizer'); ?>
-                            </label>
-                        </td>
-                    </tr>
-                </table>
-                
-                <p class="submit">
-                    <button type="submit" class="button button-primary">
+
+                <div class="eeo-launch-card eeo-launch-card--session">
+                    <h2 class="eeo-launch-card__title"><?php esc_html_e('Session Type', 'elementor-editor-optimizer'); ?></h2>
+                    <div class="eeo-launch-options eeo-launch-options--radio">
+                        <label class="eeo-launch-option">
+                            <input type="radio" name="eeo_profile" value="build" class="eeo-launch-input">
+                            <span class="eeo-launch-option__content">
+                                <span class="eeo-launch-option__label"><?php esc_html_e('Build Mode', 'elementor-editor-optimizer'); ?></span>
+                                <span class="eeo-launch-option__desc"><?php esc_html_e('Loads all widgets and plugins. Use when building new sections or when something is missing.', 'elementor-editor-optimizer'); ?></span>
+                            </span>
+                        </label>
+                        <label class="eeo-launch-option">
+                            <input type="radio" name="eeo_profile" value="edit" checked class="eeo-launch-input">
+                            <span class="eeo-launch-option__content">
+                                <span class="eeo-launch-option__label"><?php esc_html_e('Edit Mode (faster)', 'elementor-editor-optimizer'); ?></span>
+                                <span class="eeo-launch-option__desc"><?php esc_html_e('Optimizes the editor so it loads faster for quick edits.', 'elementor-editor-optimizer'); ?></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="eeo-launch-card eeo-launch-card--edit-options">
+                    <h2 class="eeo-launch-card__title"><?php esc_html_e('Edit Mode Options', 'elementor-editor-optimizer'); ?></h2>
+                    <p class="eeo-launch-card__hint"><?php esc_html_e('These options apply only when Edit Mode is selected.', 'elementor-editor-optimizer'); ?></p>
+                    <div class="eeo-launch-options eeo-launch-options--check">
+                        <label class="eeo-launch-option">
+                            <input type="checkbox" name="eeo_modes[]" value="firewall" checked class="eeo-launch-input">
+                            <span class="eeo-launch-option__content">
+                                <span class="eeo-launch-option__label"><?php esc_html_e('Editor Firewall', 'elementor-editor-optimizer'); ?> <span class="eeo-badge eeo-badge--rec"><?php esc_html_e('Recommended', 'elementor-editor-optimizer'); ?></span></span>
+                                <span class="eeo-launch-option__desc"><?php esc_html_e('Loads Elementor with a minimal set of plugins and hooks for this editor session only.', 'elementor-editor-optimizer'); ?></span>
+                            </span>
+                        </label>
+                        <label class="eeo-launch-option">
+                            <input type="checkbox" name="eeo_modes[]" value="snapshot" class="eeo-launch-input">
+                            <span class="eeo-launch-option__content">
+                                <span class="eeo-launch-option__label"><?php esc_html_e('Snapshot Cache', 'elementor-editor-optimizer'); ?></span>
+                                <span class="eeo-launch-option__desc"><?php esc_html_e('Reuses precomputed Elementor data where available to reduce database work.', 'elementor-editor-optimizer'); ?></span>
+                            </span>
+                        </label>
+                        <label class="eeo-launch-option">
+                            <input type="checkbox" name="eeo_modes[]" value="diet" class="eeo-launch-input">
+                            <span class="eeo-launch-option__content">
+                                <span class="eeo-launch-option__label"><?php esc_html_e('Widget Diet', 'elementor-editor-optimizer'); ?></span>
+                                <span class="eeo-launch-option__desc"><?php esc_html_e('Disables unused Elementor widgets according to your optimizer settings.', 'elementor-editor-optimizer'); ?></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="eeo-launch-card eeo-launch-card--remember">
+                    <h2 class="eeo-launch-card__title"><?php esc_html_e('Remember choice', 'elementor-editor-optimizer'); ?></h2>
+                    <div class="eeo-launch-options eeo-launch-options--check eeo-launch-options--compact">
+                        <?php if ($post_id > 0) : ?>
+                        <label class="eeo-launch-option">
+                            <input type="checkbox" name="eeo_remember_page" value="1" class="eeo-launch-input">
+                            <span class="eeo-launch-option__label"><?php esc_html_e('Remember for this page', 'elementor-editor-optimizer'); ?></span>
+                        </label>
+                        <?php endif; ?>
+                        <label class="eeo-launch-option">
+                            <input type="checkbox" name="eeo_remember_global" value="1" class="eeo-launch-input">
+                            <span class="eeo-launch-option__label"><?php esc_html_e('Remember globally (use these modes by default)', 'elementor-editor-optimizer'); ?></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="eeo-launch-actions">
+                    <button type="submit" class="eeo-launch-btn eeo-launch-btn--primary">
                         <?php esc_html_e('Launch Elementor Editor', 'elementor-editor-optimizer'); ?>
                     </button>
-                </p>
+                </div>
             </form>
-            
-            <?php if ($post_id): ?>
-                <p class="description">
+
+            <?php if ($post_id) : ?>
+                <p class="eeo-launch-post-note">
                     <?php
                     /* translators: %d: post ID */
                     printf(esc_html__('You are about to open Elementor for post ID %d.', 'elementor-editor-optimizer'), $post_id);
                     ?>
                 </p>
             <?php endif; ?>
-            <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #ddd; color: #666; font-size: 13px;">
+
+            <footer class="eeo-launch-footer">
                 <?php esc_html_e('Powered by', 'elementor-editor-optimizer'); ?>
                 <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves</a>
-                · <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves.com</a>
-            </p>
+                <span class="eeo-launch-footer__sep">·</span>
+                <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves.com</a>
+            </footer>
         </div>
         <?php
     }
@@ -1273,10 +1287,12 @@ class Elementor_Editor_Optimizer {
      * Admin scripts and styles
      */
     public function enqueue_admin_scripts($hook) {
-        if ('settings_page_elementor-editor-optimizer' !== $hook) {
+        $is_settings = ('settings_page_elementor-editor-optimizer' === $hook);
+        $is_launch   = ('admin_page_eeo-elementor-launch' === $hook);
+        if (!$is_settings && !$is_launch) {
             return;
         }
-        
+
         wp_enqueue_style(
             'elementor-editor-optimizer-admin',
             EEO_PLUGIN_URL . 'assets/css/admin.css',
@@ -1284,28 +1300,25 @@ class Elementor_Editor_Optimizer {
             EEO_VERSION
         );
 
-        // Add a version query string to bust cache
-        $js_url = EEO_PLUGIN_URL . 'assets/js/admin.js?v=' . time();
-        wp_enqueue_script(
-            'elementor-editor-optimizer-admin',
-            $js_url,
-            ['jquery'],
-            EEO_VERSION,
-            true
-        );
-
-        wp_localize_script('elementor-editor-optimizer-admin', 'eeo_data', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('eeo_nonce'),
-        ]);
-
-        // Add a fallback warning if JS fails to load
-        add_action('admin_footer', function() {
-            echo '<noscript><div style="color: #fff; background: #d63638; padding: 10px; font-weight: bold;">MCX Elementor Editor Optimizer: JavaScript is required for widget analytics and optimization features.</div></noscript>';
-            echo '<div id="eeo-js-warning" style="display:none;color:#fff;background:#d63638;padding:10px;font-weight:bold;">MCX Elementor Editor Optimizer: JavaScript failed to load or eeo_data is missing. Please check for plugin conflicts or browser errors.</div>';
-            echo '<script>setTimeout(function(){if(typeof eeo_data==="undefined"||!window.jQuery){document.getElementById("eeo-js-warning").style.display="block";}},1000);</script>';
-        });
-        
+        if ($is_settings) {
+            $js_url = EEO_PLUGIN_URL . 'assets/js/admin.js?v=' . time();
+            wp_enqueue_script(
+                'elementor-editor-optimizer-admin',
+                $js_url,
+                ['jquery'],
+                EEO_VERSION,
+                true
+            );
+            wp_localize_script('elementor-editor-optimizer-admin', 'eeo_data', [
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('eeo_nonce'),
+            ]);
+            add_action('admin_footer', function() {
+                echo '<noscript><div style="color: #fff; background: #d63638; padding: 10px; font-weight: bold;">MCX Elementor Editor Optimizer: JavaScript is required for widget analytics and optimization features.</div></noscript>';
+                echo '<div id="eeo-js-warning" style="display:none;color:#fff;background:#d63638;padding:10px;font-weight:bold;">MCX Elementor Editor Optimizer: JavaScript failed to load or eeo_data is missing. Please check for plugin conflicts or browser errors.</div>';
+                echo '<script>setTimeout(function(){if(typeof eeo_data==="undefined"||!window.jQuery){document.getElementById("eeo-js-warning").style.display="block";}},1000);</script>';
+            });
+        }
     }
     
     /**
@@ -1318,72 +1331,71 @@ class Elementor_Editor_Optimizer {
         // Detect addon statistics
         $addon_stats = $this->get_addon_statistics($widgets);
         ?>
-        <div class="wrap">
-            <h1><?php _e('MCX Elementor Editor Optimizer', 'elementor-editor-optimizer'); ?></h1>
-            <p class="description" style="margin-top: 4px;">
-                <?php _e('Powered by', 'elementor-editor-optimizer'); ?>
-                <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves</a>
-                · <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves.com</a>
-            </p>
+        <div class="wrap eeo-wrap eeo-settings-wrap">
+            <header class="eeo-settings-header">
+                <h1 class="eeo-settings-title"><?php _e('MCX Elementor Editor Optimizer', 'elementor-editor-optimizer'); ?></h1>
+                <p class="eeo-settings-subtitle">
+                    <?php _e('Powered by', 'elementor-editor-optimizer'); ?>
+                    <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves</a>
+                    <span class="eeo-sep">·</span>
+                    <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves.com</a>
+                </p>
+            </header>
             
             <!-- Detected Addons Summary -->
             <?php if (!empty($addon_stats)): ?>
-            <div class="postbox" style="margin: 20px 0;">
-                <div class="postbox-header">
-                    <h2 class="hndle"><?php _e('🔌 Detected Elementor Addons & Widgets', 'elementor-editor-optimizer'); ?></h2>
+            <div class="eeo-card eeo-card--addons">
+                <div class="eeo-card__header">
+                    <h2 class="eeo-card__title"><?php _e('🔌 Detected Elementor Addons & Widgets', 'elementor-editor-optimizer'); ?></h2>
                 </div>
-                <div class="inside">
-                    <div class="addon-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div class="eeo-card__body">
+                    <div class="eeo-addon-stats">
                         <?php foreach ($addon_stats as $source => $stats): ?>
-                        <div class="addon-card" style="background: #f9f9f9; padding: 15px; border-radius: 5px; border-left: 4px solid #0073aa;">
-                            <h4 style="margin: 0 0 8px 0; color: #333;"><?php echo esc_html($source); ?></h4>
-                            <p style="margin: 0; color: #666; font-size: 14px;">
+                        <div class="eeo-addon-card">
+                            <h4 class="eeo-addon-card__title"><?php echo esc_html($source); ?></h4>
+                            <p class="eeo-addon-card__stats">
                                 <strong><?php echo $stats['total']; ?> widgets</strong>
                                 <?php if ($stats['used'] > 0): ?>
-                                <br><span style="color: #2e7d2e;">✓ <?php echo $stats['used']; ?> used</span>
+                                <br><span class="eeo-stat--used">✓ <?php echo $stats['used']; ?> used</span>
                                 <?php endif; ?>
                                 <?php if ($stats['unused'] > 0): ?>
-                                <br><span style="color: #d63638;">⚡ <?php echo $stats['unused']; ?> unused</span>
+                                <br><span class="eeo-stat--unused">⚡ <?php echo $stats['unused']; ?> unused</span>
                                 <?php endif; ?>
                             </p>
                         </div>
                         <?php endforeach; ?>
                     </div>
-                    <p style="margin-top: 15px; font-style: italic; color: #666;">
-                        💡 Focus on disabling unused widgets from addons you don't actively use for maximum backend speed improvement.
-                    </p>
+                    <p class="eeo-card__hint">💡 <?php _e('Focus on disabling unused widgets from addons you don\'t actively use for maximum backend speed improvement.', 'elementor-editor-optimizer'); ?></p>
                 </div>
             </div>
             <?php endif; ?>
-            
+
             <!-- Widget Usage Analytics Section -->
-            <div class="postbox" style="margin: 20px 0;">
-                <div class="postbox-header">
-                    <h2 class="hndle"><?php _e('Widget Usage Analytics - Backend Performance Optimization', 'elementor-editor-optimizer'); ?></h2>
+            <div class="eeo-card eeo-card--analytics">
+                <div class="eeo-card__header">
+                    <h2 class="eeo-card__title"><?php _e('Widget Usage Analytics', 'elementor-editor-optimizer'); ?></h2>
                 </div>
-                <div class="inside">
-                    <div class="widget-analytics-dashboard">
-                        <div class="analytics-summary" style="display: flex; gap: 20px; margin-bottom: 20px;">
-                            <div class="analytics-card" style="background: #e8f5e8; padding: 15px; border-radius: 5px; flex: 1;">
-                                <h3 style="margin: 0; color: #2e7d2e;"><?php _e('Used Widgets', 'elementor-editor-optimizer'); ?></h3>
-                                <p style="font-size: 24px; margin: 5px 0; font-weight: bold;"><?php echo count($analytics['used_widgets']); ?></p>
-                                <small><?php _e('Widgets actively used on your site', 'elementor-editor-optimizer'); ?></small>
+                <div class="eeo-card__body">
+                    <div class="eeo-analytics-dashboard">
+                        <div class="eeo-analytics-summary">
+                            <div class="eeo-analytics-card eeo-analytics-card--used">
+                                <h3 class="eeo-analytics-card__title"><?php _e('Used Widgets', 'elementor-editor-optimizer'); ?></h3>
+                                <p class="eeo-analytics-card__value"><?php echo count($analytics['used_widgets']); ?></p>
+                                <small class="eeo-analytics-card__desc"><?php _e('Widgets actively used on your site', 'elementor-editor-optimizer'); ?></small>
                             </div>
-                            <div class="analytics-card" style="background: #ffe8e8; padding: 15px; border-radius: 5px; flex: 1;">
-                                <h3 style="margin: 0; color: #d63638;"><?php _e('Unused Widgets', 'elementor-editor-optimizer'); ?></h3>
-                                <p style="font-size: 24px; margin: 5px 0; font-weight: bold;"><?php echo count($analytics['unused_widgets']); ?></p>
-                                <small><?php _e('Widgets that can be disabled safely', 'elementor-editor-optimizer'); ?></small>
+                            <div class="eeo-analytics-card eeo-analytics-card--unused">
+                                <h3 class="eeo-analytics-card__title"><?php _e('Unused Widgets', 'elementor-editor-optimizer'); ?></h3>
+                                <p class="eeo-analytics-card__value"><?php echo count($analytics['unused_widgets']); ?></p>
+                                <small class="eeo-analytics-card__desc"><?php _e('Widgets that can be disabled safely', 'elementor-editor-optimizer'); ?></small>
                             </div>
-                            <div class="analytics-card" style="background: #e8f4fd; padding: 15px; border-radius: 5px; flex: 1;">
-                                <h3 style="margin: 0; color: #0073aa;"><?php _e('Potential Speed Gain', 'elementor-editor-optimizer'); ?></h3>
-                                <p style="font-size: 24px; margin: 5px 0; font-weight: bold;">
-                                    <?php echo round((count($analytics['unused_widgets']) / $analytics['total_widgets']) * 100); ?>%
-                                </p>
-                                <small><?php _e('Estimated backend performance improvement', 'elementor-editor-optimizer'); ?></small>
+                            <div class="eeo-analytics-card eeo-analytics-card--gain">
+                                <h3 class="eeo-analytics-card__title"><?php _e('Potential Speed Gain', 'elementor-editor-optimizer'); ?></h3>
+                                <p class="eeo-analytics-card__value"><?php echo $analytics['total_widgets'] > 0 ? round((count($analytics['unused_widgets']) / $analytics['total_widgets']) * 100) : 0; ?>%</p>
+                                <small class="eeo-analytics-card__desc"><?php _e('Estimated backend performance improvement', 'elementor-editor-optimizer'); ?></small>
                             </div>
                         </div>
-                        
-                        <div class="analytics-actions" style="margin-bottom: 20px;">
+
+                        <div class="eeo-analytics-actions">
                             <button type="button" class="button button-primary" id="scan-widget-usage">
                                 <?php _e('Scan Widget Usage Now', 'elementor-editor-optimizer'); ?>
                             </button>
@@ -1394,7 +1406,7 @@ class Elementor_Editor_Optimizer {
                                 <?php _e('Reset Usage Data', 'elementor-editor-optimizer'); ?>
                             </button>
                             <?php if (!empty($analytics['last_scan'])): ?>
-                            <p style="margin: 10px 0; font-style: italic;">
+                            <p class="eeo-last-scan">
                                 <?php printf(
                                     __('Last scan: %s (%d posts analyzed)', 'elementor-editor-optimizer'),
                                     date('M j, Y g:i A', $analytics['last_scan']['timestamp']),
@@ -1403,17 +1415,15 @@ class Elementor_Editor_Optimizer {
                             </p>
                             <?php endif; ?>
                         </div>
-                        
+
                         <!-- Unused Widgets Quick Disable -->
                         <?php if (!empty($analytics['unused_widgets'])): ?>
-                        <div class="unused-widgets-section" style="background: #fff; border: 1px solid #ccd0d4; border-radius: 4px; padding: 15px; margin-bottom: 20px;">
-                            <div style="margin-bottom: 12px;">
-                                <input type="text" id="eeo-unused-widget-search" placeholder="Search unused widgets..." style="width: 100%; max-width: 400px; padding: 7px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px;" autocomplete="off">
+                        <div class="eeo-unused-widgets-section">
+                            <div class="eeo-widget-search-wrap">
+                                <input type="text" id="eeo-unused-widget-search" class="eeo-search-input" placeholder="<?php esc_attr_e('Search unused widgets...', 'elementor-editor-optimizer'); ?>" autocomplete="off">
                             </div>
-                            <h3 style="margin-top: 0; color: #d63638;">
-                                <?php _e('🚀 Quick Disable Unused Widgets (Boost Backend Speed)', 'elementor-editor-optimizer'); ?>
-                            </h3>
-                            <p><?php _e('These widgets were not found in any of your pages/posts. Disabling them will significantly speed up the Elementor editor backend:', 'elementor-editor-optimizer'); ?></p>
+                            <h3 class="eeo-unused-widgets-title"><?php _e('🚀 Quick Disable Unused Widgets', 'elementor-editor-optimizer'); ?></h3>
+                            <p class="eeo-unused-widgets-desc"><?php _e('These widgets were not found in any of your pages/posts. Disabling them will significantly speed up the Elementor editor backend.', 'elementor-editor-optimizer'); ?></p>
                             
                             <?php 
                             // Group widgets by source for better organization
@@ -1427,39 +1437,28 @@ class Elementor_Editor_Optimizer {
                             }
                             ?>
                             
-                            <div class="unused-widgets-by-source" style="max-height: 400px; overflow-y: auto;">
+                            <div class="eeo-unused-widgets-by-source">
                                 <?php foreach ($widgets_by_source as $source => $source_widgets): ?>
-                                <div class="widget-source-group" style="margin-bottom: 15px; border: 1px solid #e1e1e1; border-radius: 4px; background: white;">
-                                    <div class="source-header" style="background: #f7f7f7; padding: 10px; border-bottom: 1px solid #e1e1e1; font-weight: bold; color: #333;">
-                                        <?php echo esc_html($source); ?> 
-                                        <span style="color: #666; font-weight: normal; font-size: 12px;">(<?php echo count($source_widgets); ?> widgets)</span>
-                                    </div>
-                                    <div class="source-widgets" style="padding: 10px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px;">
+                                <div class="eeo-widget-source-group">
+                                    <div class="eeo-widget-source-header"><?php echo esc_html($source); ?> <span class="eeo-widget-source-count">(<?php echo count($source_widgets); ?> widgets)</span></div>
+                                    <div class="eeo-widget-source-list">
                                         <?php foreach ($source_widgets as $widget_id => $widget_data): ?>
-                                        <label class="eeo-widget-label" 
-                                            data-widget-name="<?php echo esc_attr(strtolower($widget_data['name'])); ?>" 
-                                            data-widget-id="<?php echo esc_attr(strtolower($widget_id)); ?>"
-                                            style="display: flex; align-items: center; padding: 5px; background: #f9f9f9; border-radius: 3px; border: 1px solid #e8e8e8; cursor: pointer;">
-                                            <input type="checkbox" class="unused-widget-checkbox" value="<?php echo esc_attr($widget_id); ?>" style="margin-right: 8px;">
-                                            <span style="flex: 1;"><?php echo esc_html($widget_data['name']); ?></span>
-                                            <small style="color: #888; font-size: 11px;"><?php echo esc_html($widget_id); ?></small>
+                                        <label class="eeo-widget-label" data-widget-name="<?php echo esc_attr(strtolower($widget_data['name'])); ?>" data-widget-id="<?php echo esc_attr(strtolower($widget_id)); ?>">
+                                            <input type="checkbox" class="unused-widget-checkbox" value="<?php echo esc_attr($widget_id); ?>">
+                                            <span class="eeo-widget-label__name"><?php echo esc_html($widget_data['name']); ?></span>
+                                            <small class="eeo-widget-label__id"><?php echo esc_html($widget_id); ?></small>
                                         </label>
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
                             </div>
-                            
-                            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e1e1e1; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                            <div class="eeo-unused-widgets-actions">
                                 <button type="button" class="button button-secondary" id="select-all-unused"><?php _e('Select All', 'elementor-editor-optimizer'); ?></button>
                                 <button type="button" class="button button-secondary" id="select-none-unused"><?php _e('Select None', 'elementor-editor-optimizer'); ?></button>
                                 <button type="button" class="button button-secondary" id="reset-unused-selection"><?php _e('Reset Selection', 'elementor-editor-optimizer'); ?></button>
-                                <button type="button" class="button button-primary" id="disable-selected-unused" style="margin-left: 10px;">
-                                    <?php _e('Disable Selected Widgets', 'elementor-editor-optimizer'); ?>
-                                </button>
-                                <p style="margin: 10px 0; font-size: 12px; color: #666; flex: 1 1 100%;">
-                                    💡 <?php _e('Tip: Focus on disabling widgets from addons you don\'t actively use for maximum speed improvement.', 'elementor-editor-optimizer'); ?>
-                                </p>
+                                <button type="button" class="button button-primary" id="disable-selected-unused"><?php _e('Disable Selected Widgets', 'elementor-editor-optimizer'); ?></button>
+                                <p class="eeo-unused-widgets-tip">💡 <?php _e('Tip: Focus on disabling widgets from addons you don\'t actively use for maximum speed improvement.', 'elementor-editor-optimizer'); ?></p>
                             </div>
                         </div>
                         <?php endif; ?>
@@ -1467,20 +1466,21 @@ class Elementor_Editor_Optimizer {
                 </div>
             </div>
             
-            <form method="post" action="options.php">
+            <form method="post" action="options.php" class="eeo-settings-form">
                 <?php
                 settings_fields('elementor_editor_optimizer_group');
                 do_settings_sections('elementor_editor_optimizer_group');
                 ?>
-                
-                <table class="form-table">
+                <div class="eeo-card eeo-card--settings">
+                    <div class="eeo-card__body">
+                <table class="form-table eeo-form-table">
                     <tr>
                         <th scope="row"><?php _e('Disable Widgets', 'elementor-editor-optimizer'); ?></th>
                         <td>
                             <?php if (empty($widgets)) : ?>
                                 <p><em><?php _e('Elementor not detected or no widgets available.', 'elementor-editor-optimizer'); ?></em></p>
                             <?php else : ?>
-                                <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 15px; background: #f9f9f9;">
+                                <div class="eeo-widgets-list-inner">
                                     <?php foreach ($widgets as $widget_id => $widget_data) : ?>
                                         <?php
                                         $is_used = isset($analytics['used_widgets'][$widget_id]);
@@ -1488,35 +1488,26 @@ class Elementor_Editor_Optimizer {
                                         $is_essential = $this->is_core_widget($widget_id);
                                         $source = isset($widget_data['source']) ? $widget_data['source'] : 'Unknown';
                                         ?>
-                                        <label style="display: block; margin-bottom: 8px; padding: 8px; background: <?php echo $is_used ? '#e8f5e8' : '#ffe8e8'; ?>; border-radius: 3px;">
+                                        <label class="eeo-widget-row eeo-widget-row--<?php echo $is_used ? 'used' : 'unused'; ?>">
                                             <input type="checkbox" 
                                                    name="elementor_editor_optimizer_settings[disable_widgets][]" 
                                                    value="<?php echo esc_attr($widget_id); ?>"
                                                    <?php checked(in_array($widget_id, $this->settings['disable_widgets'])); ?>
                                                    <?php disabled($is_essential); ?>>
                                             
-                                            <strong><?php echo esc_html($widget_data['name']); ?></strong>
-                                            <small style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px; margin-left: 8px; font-size: 11px;">
-                                                <?php echo esc_html($source); ?>
-                                            </small>
-                                            
+                                            <strong class="eeo-widget-row__name"><?php echo esc_html($widget_data['name']); ?></strong>
+                                            <span class="eeo-widget-row__source"><?php echo esc_html($source); ?></span>
                                             <?php if ($is_essential) : ?>
-                                                <span style="color: #d63638; font-weight: bold;">(Essential - Cannot be disabled)</span>
+                                                <span class="eeo-widget-row__tag eeo-widget-row__tag--essential"><?php _e('Essential – Cannot be disabled', 'elementor-editor-optimizer'); ?></span>
                                             <?php elseif ($is_used) : ?>
-                                                <span style="color: #2e7d2e; font-weight: bold;">✓ Used</span>
+                                                <span class="eeo-widget-row__tag eeo-widget-row__tag--used">✓ <?php _e('Used', 'elementor-editor-optimizer'); ?></span>
                                                 <?php if ($usage_info): ?>
-                                                <small style="color: #666;">
-                                                    (Used <?php echo $usage_info['count']; ?> times, 
-                                                    last: <?php echo date('M j', $usage_info['last_used']); ?>)
-                                                </small>
+                                                <small class="eeo-widget-row__usage">(<?php echo $usage_info['count']; ?> <?php _e('times', 'elementor-editor-optimizer'); ?>, <?php echo date('M j', $usage_info['last_used']); ?>)</small>
                                                 <?php endif; ?>
                                             <?php else : ?>
-                                                <span style="color: #d63638; font-weight: bold;">⚡ Not Used - Safe to Disable</span>
+                                                <span class="eeo-widget-row__tag eeo-widget-row__tag--unused">⚡ <?php _e('Not used – safe to disable', 'elementor-editor-optimizer'); ?></span>
                                             <?php endif; ?>
-                                            
-                                            <small style="display: block; color: #666; margin-top: 3px;">
-                                                ID: <?php echo esc_html($widget_id); ?>
-                                            </small>
+                                            <small class="eeo-widget-row__id">ID: <?php echo esc_html($widget_id); ?></small>
                                         </label>
                                     <?php endforeach; ?>
                                 </div>
@@ -1543,7 +1534,7 @@ class Elementor_Editor_Optimizer {
                             <?php if (empty($can_disable)) : ?>
                                 <p><em><?php _e('No other plugins to optionally disable.', 'elementor-editor-optimizer'); ?></em></p>
                             <?php else : ?>
-                                <div style="max-height:200px;overflow-y:auto;border:1px solid #ddd;padding:10px;background:#f9f9f9;">
+                                <div class="eeo-firewall-plugins-list">
                                     <?php foreach ($can_disable as $plugin_basename) :
                                         if (!function_exists('get_plugin_data')) {
                                             require_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -1551,10 +1542,10 @@ class Elementor_Editor_Optimizer {
                                         $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_basename, false, false);
                                         $name = isset($plugin_data['Name']) ? $plugin_data['Name'] : $plugin_basename;
                                     ?>
-                                    <label style="display:block;margin-bottom:6px;">
+                                    <label class="eeo-firewall-plugin-item">
                                         <input type="checkbox" name="elementor_editor_optimizer_settings[firewall_plugins][]" value="<?php echo esc_attr($plugin_basename); ?>" <?php checked(in_array($plugin_basename, $firewall_plugins)); ?>>
                                         <?php echo esc_html($name); ?>
-                                        <small style="color:#666;">(<?php echo esc_html($plugin_basename); ?>)</small>
+                                        <small class="eeo-firewall-plugin-id">(<?php echo esc_html($plugin_basename); ?>)</small>
                                     </label>
                                     <?php endforeach; ?>
                                 </div>
@@ -1634,35 +1625,40 @@ class Elementor_Editor_Optimizer {
                         </td>
                     </tr>
                 </table>
-                
-                <?php submit_button(); ?>
+                <?php submit_button(__('Save Settings', 'elementor-editor-optimizer'), 'primary', 'submit', true, ['class' => 'eeo-btn eeo-btn--primary']); ?>
+                    </div>
+                </div>
             </form>
             
-            <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-left: 4px solid #00a0d2;">
-                <h3><?php _e('Performance Information', 'elementor-editor-optimizer'); ?></h3>
-                <p><strong><?php _e('Expected Speed Improvements:', 'elementor-editor-optimizer'); ?></strong></p>
-                <ul>
-                    <li><?php _e('Editor Loading: 30-50% faster', 'elementor-editor-optimizer'); ?></li>
-                    <li><?php _e('Frontend Speed: 15-25% improvement', 'elementor-editor-optimizer'); ?></li>
-                    <li><?php _e('Memory Usage: 20-40% reduction', 'elementor-editor-optimizer'); ?></li>
-                </ul>
-                
-                <p><strong><?php _e('Current Status:', 'elementor-editor-optimizer'); ?></strong></p>
-                <ul>
-                    <li><?php _e('Total Widgets Available:', 'elementor-editor-optimizer'); ?> <?php echo count($widgets); ?></li>
-                    <li><?php _e('Widgets to Disable:', 'elementor-editor-optimizer'); ?> <?php echo count($this->settings['disable_widgets']); ?></li>
-                    <li><?php _e('PHP Version:', 'elementor-editor-optimizer'); ?> <?php echo PHP_VERSION; ?></li>
-                    <li><?php _e('WordPress Version:', 'elementor-editor-optimizer'); ?> <?php echo get_bloginfo('version'); ?></li>
-                    <?php if (defined('ELEMENTOR_VERSION')) : ?>
+            <div class="eeo-card eeo-card--performance">
+                <div class="eeo-card__header">
+                    <h3 class="eeo-card__title"><?php _e('Performance Information', 'elementor-editor-optimizer'); ?></h3>
+                </div>
+                <div class="eeo-card__body">
+                    <p class="eeo-perf-heading"><strong><?php _e('Expected Speed Improvements:', 'elementor-editor-optimizer'); ?></strong></p>
+                    <ul class="eeo-perf-list">
+                        <li><?php _e('Editor Loading: 30-50% faster', 'elementor-editor-optimizer'); ?></li>
+                        <li><?php _e('Frontend Speed: 15-25% improvement', 'elementor-editor-optimizer'); ?></li>
+                        <li><?php _e('Memory Usage: 20-40% reduction', 'elementor-editor-optimizer'); ?></li>
+                    </ul>
+                    <p class="eeo-perf-heading"><strong><?php _e('Current Status:', 'elementor-editor-optimizer'); ?></strong></p>
+                    <ul class="eeo-perf-list">
+                        <li><?php _e('Total Widgets Available:', 'elementor-editor-optimizer'); ?> <?php echo count($widgets); ?></li>
+                        <li><?php _e('Widgets to Disable:', 'elementor-editor-optimizer'); ?> <?php echo count($this->settings['disable_widgets']); ?></li>
+                        <li><?php _e('PHP Version:', 'elementor-editor-optimizer'); ?> <?php echo PHP_VERSION; ?></li>
+                        <li><?php _e('WordPress Version:', 'elementor-editor-optimizer'); ?> <?php echo get_bloginfo('version'); ?></li>
+                        <?php if (defined('ELEMENTOR_VERSION')) : ?>
                         <li><?php _e('Elementor Version:', 'elementor-editor-optimizer'); ?> <?php echo ELEMENTOR_VERSION; ?></li>
-                    <?php endif; ?>
-                </ul>
+                        <?php endif; ?>
+                    </ul>
+                </div>
             </div>
-            <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #ddd; color: #666; font-size: 13px;">
+            <footer class="eeo-settings-footer">
                 <?php _e('Powered by', 'elementor-editor-optimizer'); ?>
                 <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves</a>
-                · <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves.com</a>
-            </p>
+                <span class="eeo-sep">·</span>
+                <a href="https://miracuves.com" target="_blank" rel="noopener noreferrer">Miracuves.com</a>
+            </footer>
         </div>
         <?php
     }
